@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Tasks</title>
+</head>
+
+<body>
+
+    <a href="{% url 'tasks:add' %}">
+        ADD
+    </a>
+
+    <main role="main" class="container">
+
+        <div class="row">
+            {% for task in tasks %}
+            <div class="col-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ task.name }}</h5>
+                        <p class="card-text">{{ task.description }}</p>
+                        <p class="card-text">{{ task.is_completed }}</p>
+                        <a href="{% url 'tasks:remove' task.id %}" class="btn btn-warning">remove task</a>
+                        {% if task.is_completed == 'uncompleted' %}
+                        <a href="{% url 'tasks:complete' task.id %}" class="btn btn-primary">complete task</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+
+    </main>
+
+</body>
+
+</html>
